@@ -59,15 +59,17 @@ class NewsInfo(db.Model, BaseModel):
     user_id = db.Column(db.Integer, db.ForeignKey('user_info.id'))
     # 新闻与评论为1对多，在新闻中定义关系属性
     comments = db.relationship('NewsComment', backref='news', lazy='dynamic', order_by='NewsComment.id.desc()')
-
+    @property
+    def pic_url(self):
+        return 'http://oyvzbpqij.bkt.clouddn.com/'+self.pic
 
 class UserInfo(db.Model, BaseModel):
     __tablename__ = 'user_info'
     id = db.Column(db.Integer, primary_key=True)
     # 图片保存在磁盘上，这里存文件在磁盘的路径
-    avatar = db.Column(db.String(50), default='user_pic.png')
+    avatar = db.Column(db.String(50), default='FqpDiGx81qkUNINriHHL9TqHADho')
     nick_name = db.Column(db.String(20))
-    signature = db.Column(db.String(200))
+    signature = db.Column(db.String(200),default='')
     public_count = db.Column(db.Integer, default=0)
     follow_count = db.Column(db.Integer, default=0)
     mobile = db.Column(db.String(11))
@@ -115,6 +117,9 @@ class UserInfo(db.Model, BaseModel):
 
     def check_pwd(self, pwd):
         return check_password_hash(self.password_hash, pwd)
+    @property
+    def avatar_url(self):
+        return 'http://oyvzbpqij.bkt.clouddn.com/' + self.avatar
 
 
 class NewsComment(db.Model, BaseModel):

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用户中心</title>
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/news/css/jquery.pagination.css">
+    <link rel="stylesheet" type="text/css" href="../../static/news/css/main.css">
+    <script type="text/javascript" src="../../static/news/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../../static/news/js/jquery.pagination.min.js"></script>
+</head>
+<body class="inframe_body">
+    <div class="news_list">
+        <h3>新闻列表</h3>
+        <ul class="article_list">
+            {% for news in news_list1 %}
+            <li>
+                <a href="user/edit/{{ news.id }}">{{ news.title }}</a>
+            {% if news.status==1 %}
+            <em class="review">审核中</em>
+            {% elif news.status==2 %}
+            <em class="pass">已通过</em>
+            {% else %}
+                <em class="nopass">未通过</em>
+                <b>{{ news.reason }}</b>
+            {% endif %}
+            <span>{{ news.create_time }}</span>
+            </li>
+            {% endfor %}
+
+        </ul>
+        <div id="pagination" class="page"></div>
+        <script>
+            // 调用父页面的方法改变菜单指示
+            // window.parent.fnChangeMenu(2);
+
+            $(function(){
+                $("#pagination").pagination({
+                    currentPage: {{ page }},
+                    totalPage: {{ total_page }},
+                    callback: function(current) {
+                        location.href='?page='+current;
+                    }
+                });
+            });
+        </script>
+       
+    </div>
+</body>
+</html>

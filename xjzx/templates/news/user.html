@@ -1,0 +1,30 @@
+{% extends 'news/base.html' %}
+
+{% block head %}
+	<script type="text/javascript" src="../../static/news/js/jquery.form.min.js"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="conter_con">
+		<div class="user_menu_con fl">
+			<div class="user_center_pic">
+				<img src="{{ g.user.avatar_url }}" alt="用户图片">
+			</div>
+			<div class="user_center_name">{{ g.user.nick_name }}</div>
+
+			<ul class="option_list">
+				<li class="active"><a href="/user/base" target="main_frame">基本资料</a></li>
+				<li><a href="/user/pic" target="main_frame">头像设置</a></li>
+				<li><a href="/user/follow" target="main_frame">我的关注</a></li>
+				<li><a href="/user/pass" target="main_frame">密码修改</a></li>
+				<li><a href="/user/collection" target="main_frame">我的收藏</a></li>
+				<li><a href="/user/release" target="main_frame">新闻发布</a></li>
+				<li><a href="/user/list" target="main_frame">新闻列表</a></li>
+			</ul>
+		</div>
+
+		<div class="user_con fr">
+			<iframe src="/user/base" frameborder="0" name="main_frame" class="main_frame" id="main_frame"></iframe>
+		</div>		
+	</div>
+{% endblock %}
