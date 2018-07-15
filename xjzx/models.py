@@ -45,7 +45,7 @@ class NewsCategory(db.Model, BaseModel):
 class NewsInfo(db.Model, BaseModel):
     __tablename__ = 'news_info'
     id = db.Column(db.Integer, primary_key=True)
-    pic = db.Column(db.String(50))
+    pic = db.Column(db.String(50),default='FqpDiGx81qkUNINriHHL9TqHADho')
     title = db.Column(db.String(30))
     summary = db.Column(db.String(200))
     context = db.Column(db.Text)
@@ -131,6 +131,6 @@ class NewsComment(db.Model, BaseModel):
     news_id = db.Column(db.Integer, db.ForeignKey('news_info.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user_info.id'))
     # 外键：自关联，回复评论的信息
-    comment_id = db.Column(db.Integer, db.ForeignKey('news_comment.id'))
+    comment_id = db.Column(db.Integer, db.ForeignKey('news_comment.id'),default=None)
     # 关系属性：自关联comment.comments获取当前评论的所有回复信息
     comments = db.relationship('NewsComment', lazy='dynamic')

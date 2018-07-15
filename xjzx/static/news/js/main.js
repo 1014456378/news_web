@@ -120,13 +120,28 @@ $(function () {
             }else if(data.result==2){
                 alert('手机号错误')
             }else if(data.result==0){
+                  if(/^\/\d+$/.test(location.pathname)){
+                    $('.comment_form_logout').hide();
+                      $('.comment_form').show();
+                      $.get('/collect',{
+                          'news_id':$('#news_id').val()
+                      },function (data) {
+                          if(data.result==4){
+                              $('.collection').hide();
+                              $('.collected').show()
+                          }else if(data.result==5){
+                              $('.collection').show();
+                              $('.collected').hide()
+                          }
+                      })
+                }
                 //登录表单隐藏
                 $('.login_form_con').hide();
                 //右上角提示信息改变
                 $('.user_btns').hide();
                 $('.user_login').show();
                 //展示头像、昵称
-                $('.lgin_pic').attr('src','/static/news/images/'+data.avatar);
+                $('.lgin_pic').attr('src',data.avatar);
                 $('#nick_name').html(data.nick_name);
             }else{
                 alert('密码错误')
@@ -203,9 +218,20 @@ function logout() {
         'csrf_token':$('#csrf_token').val()
     },function (data) {
         if(data.result==1){
+            // 如果当前在用户中心页面，转到主页
+            if (location.pathname=='/user/'){
+                location.href = '/';
+            }
+            else{
+                if(/^\/\d+$/.test(location.pathname)){
+                    $('.comment_form').hide();
+                    $('.comment_form_logout').show();
+                    $('.collection').show();
+                    $('.collected').hide()
+                }
             $('.user_btns').show();
             $('.user_login').hide();
-        }
+        }}
     })
 }
 // TODO 生成一个图片验证码的编号，并设置页面中图片验证码img标签的src属性
@@ -249,12 +275,12 @@ function sendSMSCode() {
 }
 
 // 调用该函数模拟点击左侧按钮
-function fnChangeMenu(n) {
+function fnChangeMenu0(n) {
     var $li = $('.option_list li');
     if (n >= 0) {
         $li.eq(n).addClass('active').siblings().removeClass('active');
         // 执行 a 标签的点击事件
-        $li.eq(n).find('a')[0].click()
+        // $li.eq(n).find('a')[0].click()
     }
 }
 

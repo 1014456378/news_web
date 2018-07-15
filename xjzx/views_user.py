@@ -79,7 +79,7 @@ def login():
             #记录用户登录
             session['user_id'] = user.id
             #返回头像和昵称
-            return jsonify(result = 0,nick_name = user.nick_name,avatar = user.avatar)
+            return jsonify(result = 0,nick_name = user.nick_name,avatar = user.avatar_url)
         else:
             return jsonify(result = 4) #密码错误
     else:
@@ -199,8 +199,9 @@ def release():
     news.summary = summary
     news.context = content
     pic = request.files.get('pic')
-    pic_name=qiniu_upload.upload(pic)
-    news.pic=pic_name
+    if pic:
+        pic_name=qiniu_upload.upload(pic)
+        news.pic=pic_name
     news.user_id=session.get('user_id')
     db.session.add(news)
     db.session.commit()

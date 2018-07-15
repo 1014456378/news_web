@@ -297,17 +297,17 @@ body{
 	color:#39f;
 }
 
-.rank_list li .first{
+.rank_list li .click1{
 	background: #f33;
 	color:#fff;
 }
 
-.rank_list li .second{
+.rank_list li .click2{
 	background:#ff722b;
 	color:#fff;
 }
 
-.rank_list li .third{
+.rank_list li .click3{
 	background:#fa3;
 	color:#fff;
 }

@@ -12,7 +12,7 @@
 </head>
 <body class="inframe_body">
     <form class="release_form" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="csrf_token" value="csrf_token()">
+        <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
         <h3>新闻修改</h3>
         <div class="form-group"><label>新闻标题：</label><input type="text" class="input_txt2" name="title" value="{{ news.title }}"></div>
         <div class="form-group">
@@ -34,10 +34,12 @@
         </div>
         <div class="error_tip2">错误提示</div>
     </form>
-    <script>
-        $(function(){
-            window.parent.fnSetIframeHeight(1000);
-        })
-    </script>
+<script>
+    $(function(){
+        window.parent.fnSetIframeHeight(1000);
+        var $li = $('.option_list li',window.parent.document);
+        $li.eq(5).addClass('active').siblings().removeClass('active');
+    })
+</script>
 </body>
 </html>

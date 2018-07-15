@@ -15,11 +15,18 @@
 		<div class="header">
 			<a href="/" class="logo fl"><img src="../../static/news/images/logo.png" alt="logo"></a>
             {% block menu %}{% endblock %}
-            <div class="user_login fr" style="display:block;">
+            <div class="user_btns fr" {% if g.user %}style="display: none" {% endif %}>
+                <a href="javascript:;" class="login_btn">登录</a> / <a href="javascript:;" class="register_btn">注册</a>
+            </div>
+
+            <div class="user_login fr" {% if g.user %}style="display:block" {% endif %}>
+            {% if g.user %}
                 <img src="{{ g.user.avatar_url }}" class="lgin_pic">
                 <a href="/user/" id="nick_name">{{ g.user.nick_name }}</a>
-                <a href="#" onclick="logout();">退出</a>
+                <a href="javascript:;" onclick="logout()">退出</a>
+            {% endif %}
             </div>
+
 		</div>
 	</div>
 

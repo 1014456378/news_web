@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../static/admin/css/jquery.pagination.css">
     <script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="../../static/admin/js/jquery.pagination.min.js"></script>
+        <script type="text/javascript" src="../../static/admin/js/vue.min.js"></script>
+
 </head>
 <body>
     <div class="breadcrub">
@@ -21,60 +23,13 @@
                     <th>注册时间</th>
                     <th>上次登录时间</th>
                 </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
+                <tr v-for="user in user_list">
+                    <td>[[user.nick_name]]</td>
+                    <td>[[user.mobile]]</td>
+                    <td>[[user.create_time]]</td>
+                    <td>[[user.update_time]]</td>
                 </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
-                <tr>
-                    <td>张大山</td>
-                    <td>13534888888</td>
-                    <td>2018-2-28 23:07:26</td>
-                    <td>2018-2-28 23:07:26</td>
-                </tr>
+
             </table>
         </div>
 
@@ -83,15 +38,26 @@
         </div>
 
         <script>
-            $(function() {
-                $("#pagination").pagination({
-                    currentPage: 2,
-                    totalPage: 3,
+            common_table_vue=new Vue({
+                el:'.common_table',
+                delimiters:['[[',']]'],
+                data:{
+                    user_list:[]
+                }
+            })
+           $.get('/admin/user_list_json',function (data) {
+               common_table_vue.user_list=data.user_list
+               $("#pagination").pagination({
+                    currentPage: 1,
+                    totalPage: data.total_page,
                     callback: function(current) {
-                        alert('ok!');
-                    }
-                });
-            });
+                        $.get('/admin/user_list_json',function (data) {
+                        common_table_vue.user_list=data.user_list
+                    })
+                }
+           })
+
+            })
         </script>
 </body>
 </html>

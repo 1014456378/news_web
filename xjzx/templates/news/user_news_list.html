@@ -15,7 +15,7 @@
         <ul class="article_list">
             {% for news in news_list1 %}
             <li>
-                <a href="user/edit/{{ news.id }}">{{ news.title }}</a>
+                <a href="/user/edit/{{ news.id }}">{{ news.title }}</a>
             {% if news.status==1 %}
             <em class="review">审核中</em>
             {% elif news.status==2 %}
@@ -43,8 +43,18 @@
                     }
                 });
             });
+            window.parent.scrollTo(0,0);
+            var $li = $('.option_list',window.parent.document)
+            $li.eq(6).addClass('active').siblings().removeClass('active');
         </script>
        
     </div>
 </body>
+<script>
+    $(function(){
+        window.parent.fnSetIframeHeight(1000);
+        var $li = $('.option_list li',window.parent.document);
+        $li.eq(6).addClass('active').siblings().removeClass('active');
+    })
+</script>
 </html>
