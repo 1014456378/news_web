@@ -1,4 +1,7 @@
+from datetime import datetime
+
 from flask import Blueprint, jsonify
+from flask import current_app
 from flask import g
 from flask import make_response
 from flask import redirect
@@ -77,7 +80,19 @@ def login():
     if user:
         if user.check_pwd(pwd):
             #记录用户登录
+            now = datetime.now()
             session['user_id'] = user.id
+            user.update_time=now
+            db.session.commit()
+            if now.hour<=8:
+                current_app.redis_cli.hincrby(now.strftime('%Y-%m-%d'),'08:00',1)
+            elif now.hour>19:
+                current_app.redis_cli.hincrby(now.strftime('%Y-%m-%d'),'19:00',1)
+            else:
+                current_app.redis_cli.hincrby(now.strftime('%Y-%m-%d'),'%02d:00'%now.hour,1)
+
+
+
             #返回头像和昵称
             return jsonify(result = 0,nick_name = user.nick_name,avatar = user.avatar_url)
         else:
