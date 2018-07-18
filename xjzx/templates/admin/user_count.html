@@ -3,9 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>新经资讯后台管理</title>
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/echarts.min.js"></script>
+=======
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+	<script type="text/javascript" src="../../static/admin/js/echarts.min.js"></script>
+>>>>>>> dev
 </head>
 <body>
 	<div class="breadcrub">
@@ -13,6 +19,7 @@
 	</div>
 	<div class="spannels">
 		<div class="spannel scolor01">
+<<<<<<< HEAD
 			<em>36365</em><span>人</span>
 			<b>用户总数</b>
 		</div>
@@ -22,6 +29,17 @@
 		</div>
 		<div class="spannel2 scolor03">
 			<em>32</em><span>人</span>
+=======
+			<em>{{ total }}</em><span>人</span>
+			<b>用户总数</b>
+		</div>
+		<div class="spannel scolor02">
+			<em>{{ total_month }}</em><span>人</span>
+			<b>用户月新增数</b>
+		</div>
+		<div class="spannel2 scolor03">
+			<em>{{ total_day }}</em><span>人</span>
+>>>>>>> dev
 			<b>用户日新增数</b>
 		</div>		
 	</div>
@@ -60,7 +78,11 @@
 		                        name: '今天',
 					            type : 'category',
 					            boundaryGap : false,
+<<<<<<< HEAD
 					            data : ["08:15","09:15","10:15","11:15","12:15","13:15","14:15","15:15","16:15","17:15","18:15","19:15"]
+=======
+					            data : {{ hour_list2|safe }}
+>>>>>>> dev
 					        }
 					    ],        
 					    yAxis : [
@@ -75,7 +97,11 @@
 					            type:'line',
 					            smooth:true,
 					            itemStyle: {normal: {areaStyle: {type: 'default'}, color: '#f80'}, lineStyle: {color: '#f80'}},
+<<<<<<< HEAD
 					            data:[14951,14861,7186,15861,14951,14861,7186,14951,14861,7186,15861,14951]
+=======
+					            data:{{ count_list2 }}
+>>>>>>> dev
 					        }],
 					    areaStyle:{
 						        normal:{

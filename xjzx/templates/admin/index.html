@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>新经资讯后台管理</title>
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>	
@@ -11,17 +12,33 @@
 	<div class="header">
 		<a href="#" class="logo fl"><img src="images/logo.png" alt="logo"></a>
 		<a href="#" class="logout fr">退 出</a>
+=======
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+	<script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+	<div class="header">
+		<a href="#" class="logo fl"><img src="../../static/admin/images/logo.png" alt="logo"></a>
+		<a href="/admin/logout" class="logout fr">退 出</a>
+>>>>>>> dev
 	</div>
 	
 	<div class="side_bar">
 		<div class="user_info">
+<<<<<<< HEAD
 			<img src="images/person.png" alt="张大山">
 			<p>欢迎你 <em>张大山</em></p>
+=======
+			<img src="{{ g.user.avatar_url }}" alt="张大山">
+			<p>欢迎你 <em>{{ g.user.nick_name }}</em></p>
+>>>>>>> dev
 		</div>
 
 		<div class="menu_con">
 			<div class="first_menu active"><a href="#" class="icon01">用户管理</a></div>
 			<ul class="sub_menu show">
+<<<<<<< HEAD
 				<li><a class="icon022" href="user_count.html" target="main_frame">用户统计</a></li>
 				<li class="current"><a href="user_list.html" class="icon021" target="main_frame">用户列表</a></li>
 			</ul>
@@ -30,12 +47,26 @@
 				<li><a href="news_review.html" class="icon031"  target="main_frame">新闻审核</a></li>
 				<li><a href="news_edit.html" class="icon032"  target="main_frame">新闻版式编辑</a></li>
 				<li><a href="news_type.html" class="icon034"  target="main_frame">新闻分类管理</a></li>
+=======
+				<li><a class="icon022" href="/admin/user_count" target="main_frame">用户统计</a></li>
+				<li class="current"><a href="/admin/user_list" class="icon021" target="main_frame">用户列表</a></li>
+			</ul>
+			<div class="first_menu"><a href="#" class="icon02">新闻管理</a></div>
+			<ul class="sub_menu">
+				<li><a href="news_review.html" class="icon031" target="main_frame">新闻审核</a></li>
+				<li><a href="news_edit.html" class="icon032" target="main_frame">新闻版式编辑</a></li>
+				<li><a href="/admin/news_type" class="icon034" target="main_frame">新闻分类管理</a></li>
+>>>>>>> dev
 			</ul>
 		</div>
 	</div>
 
 	<div class="main_body" id="main_body">
+<<<<<<< HEAD
 		<iframe src="user_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0" scrolling="auto"></iframe>
+=======
+		<iframe src="/admin/user_count" frameborder="0" id="main_frame" name="main_frame" frameborder="0" scrolling="auto"></iframe>
+>>>>>>> dev
 	</div>
 	
 	<script>

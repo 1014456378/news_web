@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +66,50 @@
         <form action="" class="comment_form">
             <div class="person_pic">
                 <img src="images/cat.jpg" alt="用户图标">
+=======
+{% extends 'news/base.html' %}
+
+{% block head %}
+    <script type="text/javascript" src="/static/news/js/vue.min.js"></script>
+    <script type="text/javascript" src="/static/news/js/detail.js"></script>
+{% endblock %}
+
+
+{% block body %}
+    <input type="hidden" id="news_id" value="{{ news.id }}">
+<div class="conter_con">
+        <div class="detail_con fl">
+            <h3>{{ news.title }}</h3>
+            <div class="detail_about clearfix">
+                <span class="time_souce fl">{{ news.create_time }}</span>
+                <span class="comment fr">{{ news.click_count }}</span>
+            </div>
+
+            <p class="summary">{{ news.summary }}</p>
+
+            {{ news.context|safe }}
+        {% if g.user %}
+            {% if news in g.user.news_collect %}
+        <a href="javascript:;" class="collection block-center" style="display: none">收藏</a>
+        <a href="javascript:;" class="collected block-center"><span class="out">已收藏</span><span class="over">取消收藏</span></a>
+            {% else %}
+                <a href="javascript:;" class="collection block-center" >收藏</a>
+                <a href="javascript:;" class="collected block-center" style="display: none"><span class="out">已收藏</span><span class="over">取消收藏</span></a>
+
+            {% endif %}
+            {% else %}
+        <a href="javascript:;" class="collection block-center">收藏</a>
+        <a href="javascript:;" class="collected block-center" style="display: none"><span class="out">已收藏</span><span class="over">取消收藏</span></a>
+        {% endif %}
+
+        <div class="comment_form_logout" {% if g.user %}style="display:none;"{% endif %}>
+            登录发表你的评论
+        </div>
+
+        <form class="comment_form" {% if not g.user %}style="display:none;"{% endif %}>
+            <div class="person_pic">
+                <img src="{{ g.user.avatar_url }}" alt="用户图标">
+>>>>>>> dev
             </div>
             <textarea placeholder="请发表您的评论" class="comment_input"></textarea>
             <input type="submit" name="" value="评 论" class="comment_sub">
@@ -72,6 +117,7 @@
 
 
         <div class="comment_count">
+<<<<<<< HEAD
             4条评论
         </div>
         
@@ -259,3 +305,51 @@
     </form>
 </body>
 </html>
+=======
+            <span>{{ news.comment_count }}</span>条评论
+        </div>
+
+        <div class="comment_list_con">
+            <div class="comment_list" v-for="comment in comment_list">
+                <div class="person_pic fl">
+                    <img :src="comment.avatar_url" alt="用户图标">
+                </div>
+                <div class="user_name fl">[[comment.nick_name]]</div>
+                <div class="comment_text fl">[[comment.msg]]</div>
+                <div class="reply_text_con fl" v-for="reply in comment.reply_list">
+                    <div class="user_name2">[[reply.nick_name]]</div>
+                    <div class="reply_text">[[reply.msg]]</div>
+                </div>
+                <div class="comment_time fl">[[comment.create_time]]</div>
+                <a href="javascript:;" class="comment_up has_comment_up fr">[[comment.like_count]]</a>
+                <a href="javascript:;" class="comment_reply fr">回复</a>
+                <from class="reply_form fl">
+                    <textarea  class="reply_input"></textarea>
+                    <input type="submit" :name="comment.id" value="回复" class="reply_sub fr">
+                    <input type="reset" name="" value="取消" class="reply_cancel fr">
+                </from>
+            </div>
+        </div>
+
+
+        </div>
+        <div class="rank_con fr">
+            <div class="author_card">
+                <a href="#" class="author_pic"><img src="{{ news.user.avatar_url }}" alt="author_pic"></a>
+                <a href="#" class="author_name">{{ news.user.nick_name }}</a>
+                <div class="author_resume">{{ news.user.signature }}</div>
+                <div class="writings"><span>总篇数</span><b>{{ news.user.public_count }}</b></div>
+                <div class="follows"><span>粉丝</span><b>{{ news.user.follow_count }}</b></div>
+                <a href="javascript:;" class="focus fr">关注</a>
+                <a href="javascript:;" class="focused fr"><span class="out">已关注</span><span class="over">取消关注</span></a>
+            </div>
+
+
+            {% import 'news/macro_my.html' as macro_my %}
+            {{ macro_my.click_show(click_list) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+>>>>>>> dev

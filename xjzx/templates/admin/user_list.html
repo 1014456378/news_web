@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>新经资讯后台管理</title>
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="css/jquery.pagination.css">
     <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="js/jquery.pagination.min.js"></script>
+=======
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/admin/css/main.css">
+    <link rel="stylesheet" href="../../static/admin/css/jquery.pagination.css">
+    <script type="text/javascript" src="../../static/admin/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../../static/admin/js/jquery.pagination.min.js"></script>
+        <script type="text/javascript" src="../../static/admin/js/vue.min.js"></script>
+
+>>>>>>> dev
 </head>
 <body>
     <div class="breadcrub">
@@ -21,6 +31,7 @@
                     <th>注册时间</th>
                     <th>上次登录时间</th>
                 </tr>
+<<<<<<< HEAD
                 <tr>
                     <td>张大山</td>
                     <td>13534888888</td>
@@ -75,6 +86,15 @@
                     <td>2018-2-28 23:07:26</td>
                     <td>2018-2-28 23:07:26</td>
                 </tr>
+=======
+                <tr v-for="user in user_list">
+                    <td>[[user.nick_name]]</td>
+                    <td>[[user.mobile]]</td>
+                    <td>[[user.create_time]]</td>
+                    <td>[[user.update_time]]</td>
+                </tr>
+
+>>>>>>> dev
             </table>
         </div>
 
@@ -83,6 +103,7 @@
         </div>
 
         <script>
+<<<<<<< HEAD
             $(function() {
                 $("#pagination").pagination({
                     currentPage: 2,
@@ -92,6 +113,28 @@
                     }
                 });
             });
+=======
+            common_table_vue=new Vue({
+                el:'.common_table',
+                delimiters:['[[',']]'],
+                data:{
+                    user_list:[]
+                }
+            })
+           $.get('/admin/user_list_json',function (data) {
+               common_table_vue.user_list=data.user_list
+               $("#pagination").pagination({
+                    currentPage: 1,
+                    totalPage: data.total_page,
+                    callback: function(current) {
+                        $.get('/admin/user_list_json',function (data) {
+                        common_table_vue.user_list=data.user_list
+                    })
+                }
+           })
+
+            })
+>>>>>>> dev
         </script>
 </body>
 </html>

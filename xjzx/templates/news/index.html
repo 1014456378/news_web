@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -176,3 +177,43 @@
     </form>
 </body>
 </html>
+=======
+{% extends 'news/base.html' %}
+{% block head %}
+<script type="text/javascript" src="/static/news/js/index.js"></script>
+    <script type="text/javascript" src="/static/news/js/vue.min.js"></script>
+
+{% endblock %}
+{% block menu %}
+     <ul class="menu fl">
+                <li class="active" data-cid="0"><a href="javascript:;">最新</a></li>
+         {% for category in category_list %}
+                <li data-cid="{{ category.id }}"><a href="javascript:;">{{ category.name }}</a></li>
+        {%endfor %}
+     </ul>
+{% endblock %}
+{% block body %}
+    <div class="conter_con">
+        <ul class="list_con fl" >
+            <li v-for="news in news_list">
+                <a :href="'/'+news.id" class="news_pic fl"><img v-bind:src="news.pic_url"></a>
+                <a :href="'/'+news.id" class="news_title fl">[[ news.title ]]</a>
+                <a :href="'/'+news.id" class="news_detail fl">[[ news.summary ]]</a>
+                <div class="author_info fl">
+                    <div class="author fl">
+                        <img v-bind:src="news.avatar" alt="author" style="height: 20px;width: 20px">
+                        <a href="#">[[ news.nick_name ]]</a>
+                    </div>
+                    <div class="time fl">[[news.create_time]]</div>
+                </div>
+            </li>
+
+        </ul>
+        <div class="rank_con fr">
+             {% import 'news/macro_my.html' as macro_my %}
+            {{ macro_my.click_show(click_list) }}
+
+        </div>
+    </div>
+{% endblock %}
+>>>>>>> dev

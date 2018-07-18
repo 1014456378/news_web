@@ -12,14 +12,35 @@ $(function () {
         var nick_name = $("#nick_name").val()
         var gender = $(".gender").val()
 
+<<<<<<< HEAD
         if (!nick_name) {
             alert('请输入昵称')
             return
         }
+=======
+
+>>>>>>> dev
         if (!gender) {
             alert('请选择性别')
         }
 
         // TODO 修改用户信息接口
+<<<<<<< HEAD
+=======
+        $.post('/user/base',{
+            'signature':signature,
+            'nick_name':nick_name,
+            'gender':gender,
+            'csrf_token':$('#csrf_token').val()},
+            function (data) {
+            if(data.result==0){
+                //修改左侧昵称     要在父窗口拿到标签修改数据
+                $('.user_center_name',parent.document).text(nick_name)
+                //修改右上角的昵称
+                $('#nick_name',parent.document).text(nick_name)
+
+            }
+        })
+>>>>>>> dev
     })
 })
